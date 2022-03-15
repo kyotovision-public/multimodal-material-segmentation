@@ -20,7 +20,7 @@ $ python3 -m pip install -r requirements.txt
 in your (virtual) environment.
 
 ## Download data
-The Multimodal Material Segmentation dataset (MCubeS dataset) is availible in [Google Drive](https://drive.google.com/file/d/14egTCyC0Pampb7imrXVwaDRffHN7FZxh/view?usp=sharing). Uncompress the folder and move it to `/dataset/multimodal_dataset/`
+The Multimodal Material Segmentation dataset (MCubeS dataset) is available in [Google Drive](https://drive.google.com/file/d/14egTCyC0Pampb7imrXVwaDRffHN7FZxh/view?usp=sharing). Uncompress the folder and move it to `/dataset/multimodal_dataset/`
 
 The data should organized in the following format:
 ```
@@ -51,13 +51,13 @@ multimodal_dataset
 * polL_aolp_sin (cos): the sin (cos) value of aolp data of each image set (both represented as .npy file).
 * list_folder: all.txt records the name of all image sets. Train/val/test.txt records the name of image sets assigned to train/val/test set. 
 * SS: semantic annotation of each image set. The semantic labels here are the same as Cityscapes. 
-* SSGT4MS: condensed semantic segmentation annotation of each image set. As depicted in Supplemental Materail Section C, the 23 semantic classes of Cityscapes are consolidated into 10 classes. 
-* NIR_warped_mask: mask of illeagel region of each images sets. Pixels in white area will be excluded when computing the loss. 
+* SSGT4MS: condensed semantic segmentation annotation of each image set. As depicted in Supplemental Material Section C, the 23 semantic classes of Cityscapes are consolidated into 10 classes. 
+* NIR_warped_mask: mask of illegal region of each images set. Pixels in the white area will be excluded when computing the loss. 
 * NIR_warped: NIR image of each image set.
 * GT: material annotation of each image set. 
 ## Details of MCubeS dataset
 ### Overview
-MCubeS captures the visual appearance of various materials found in daily outdoor scenes from a viewpoint on a road, pavement, or sidewalk. At each viewpoint, we capture images with three fundamentally different imaging modalities, RGB, polarization (represented as Aolp and Dolp), and near-infrared (NIR). There are 500 images sets in MCubes dataset, and each pixel in RGB image is labeled as one of 13 material classes. 
+MCubeS captures the visual appearance of various materials found in daily outdoor scenes from a viewpoint on a road, pavement, or sidewalk. At each viewpoint, we capture images with three fundamentally different imaging modalities, RGB, polarization (represented as Aolp and Dolp), and near-infrared (NIR). There are 500 images sets in MCubeS dataset, and each pixel in RGB image is labeled as one of 13 material classes. 
 <p align="center"> <img src="img/Fig1.png"> </p>
 
 ### Material labels
