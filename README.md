@@ -78,6 +78,6 @@ Train a semantic segmentation network model by images in `/dataset/multimodal_da
 $ sh main_train_multimodal.sh
 ```
 * To test MCubeSNet, simply run 
-* ```
+```
 $ sh main_test_multimodal.sh
 ```
