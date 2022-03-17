@@ -5,20 +5,6 @@ This repository provides an inplementation of our paper [Multimodal Material Seg
 Please note that this is research software and may contain bugs or other issues – please use it at your own risk. If you experience major problems with it, you may contact us, but please note that we do not have the resources to deal with all issues.
 
 
-## Prerequisites
-
-We tested our code with Python 3.6.12 on Ubuntu 18.04 LTS.  Our code depends on the following modules.
-* torch==1.7.1
-* matplotlib==3.3.2
-* numpy==1.19.2
-* opencv_python==4.4.0.44
-
-To install this package with pip, use the following command:
-```
-$ python3 -m pip install -r requirements.txt
-```
-in your (virtual) environment.
-
 ## Download data
 The Multimodal Material Segmentation dataset (MCubeS dataset) is available in [Google Drive](https://drive.google.com/file/d/14egTCyC0Pampb7imrXVwaDRffHN7FZxh/view?usp=sharing). Uncompress the folder and move it to `/dataset/multimodal_dataset/`
 
@@ -70,3 +56,28 @@ Here are some annotation examples.
 The pixel numbers of each material class in train, val and test set are shown below. 
 <p align="center"> <img src="img/Fig4.png"> </p>
 
+## Usage
+### Prerequisites
+
+We tested our code with Python 3.6.12 on Ubuntu 18.04 LTS.  Our code depends on the following modules.
+* torch==1.7.1
+* matplotlib==3.3.2
+* numpy==1.19.2
+* opencv_python==4.4.0.44
+
+To install this package with pip, use the following command:
+```
+$ python3 -m pip install -r requirements.txt
+```
+in your (virtual) environment.
+### Prepare of the semantic segmentation guidance
+Train a semantic segmentation network model by images in `/dataset/multimodal_dataset/polL_color/` and `/dataset/multimodal_dataset/SSGT4MS/`. Put the semantic segmentation result images in `/dataset/multimodal_dataset/SSmask/`.
+### Training and testing
+* To train MCubeSNet, simply run 
+```
+$ sh main_train_multimodal.sh
+```
+* To test MCubeSNet, simply run 
+* ```
+$ sh main_test_multimodal.sh
+```
