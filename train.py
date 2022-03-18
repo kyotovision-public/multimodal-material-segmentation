@@ -318,7 +318,7 @@ if __name__ == "__main__":
                                 testing (default: auto)')
     parser.add_argument('--use-balanced-weights', action='store_true', default=False,
                         help='whether to use balanced weights (default: False)')
-    parser.add_argument('--ratio', type=int, default=None, metavar='N',
+    parser.add_argument('--ratio', type=float, default=None, metavar='N',
                         help='number of ratio in RGFSConv (default: 1)')
     # optimizer params
     parser.add_argument('--lr', type=float, default=None, metavar='LR',
