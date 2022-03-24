@@ -6,7 +6,7 @@ Please note that this is research software and may contain bugs or other issues 
 
 
 ## Download data
-The Multimodal Material Segmentation dataset (MCubeS dataset) is available in [Google Drive](https://drive.google.com/file/d/14egTCyC0Pampb7imrXVwaDRffHN7FZxh/view?usp=sharing). Uncompress the folder and move it to `/dataset/multimodal_dataset/`
+The Multimodal Material Segmentation dataset (MCubeS dataset) is available in [Google Drive](https://drive.google.com/file/d/14egTCyC0Pampb7imrXVwaDRffHN7FZxh/view?usp=sharing) (`multimodal_dataset.zip`, 9.27GB). Uncompress the folder and move it to `/dataset/multimodal_dataset/`
 
 The data should organized in the following format:
 ```
