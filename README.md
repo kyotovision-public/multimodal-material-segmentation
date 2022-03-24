@@ -12,6 +12,7 @@ This repository provides an inplementation of our paper [Multimodal Material Seg
 }
 ```
 
+This implemenatation is based on [pytorch-deeplab-xception](https://github.com/jfzhang95/pytorch-deeplab-xception).  The diff can be found at [`pytorch-deeplab-xception-20191218.patch`](pytorch-deeplab-xception-20191218.patch).
 
 Please note that this is research software and may contain bugs or other issues – please use it at your own risk. If you experience major problems with it, you may contact us, but please note that we do not have the resources to deal with all issues.
 
