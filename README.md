@@ -1,6 +1,6 @@
 # Multimodal Material Segmentation, CVPR2022
 
-This repository provides an inplementation of our paper [Multimodal Material Segmentation]( ) in CVPR 2022.  If you find our work useful in your research please consider citing our paper.
+This repository provides an inplementation of our paper [Multimodal Material Segmentation]( ) in CVPR 2022.  If you use our code and data, please cite our paper.
 ```
 @InProceedings{Liang_2022_CVPR,
     author    = {Yupeng Liang and Ryosuke Wakaki and Shohei Nobuhara and Ko Nishino},
