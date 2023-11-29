@@ -68,6 +68,11 @@ Here are some annotation examples.
 The pixel numbers of each material class in train, val and test set are shown below. 
 <p align="center"> <img src="img/Fig4.png"> </p>
 
+## Pretrained model
+A pretrained model is available in [Google Drive](https://drive.google.com/file/d/1k2K7js7TNNVPgpgVyOyA8qfnFIrJnaiC/view?usp=drive_link) (`chekpoint.pth.tar`, 1.8GB).  You can use this file as 
+`run/multimodal_dataset/MCubeSNet/experiment_0/checkpoint.pth.tar`
+as specified in `main_test_multimodal.sh` below to run the test code.
+
 ## Usage
 ### Prerequisites
 
