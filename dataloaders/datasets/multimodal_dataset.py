@@ -8,6 +8,7 @@ from mypath import Path
 from torchvision import transforms
 from dataloaders import custom_transforms_multimodal as tr
 
+
 class MultimodalDatasetSegmentation(Dataset):
     NUM_CLASSES = 20
 
@@ -25,7 +26,7 @@ class MultimodalDatasetSegmentation(Dataset):
         self._base_dir = base_dir
         self._image_dir = os.path.join(self._base_dir, 'polL_color')
         self._cat_dir = os.path.join(self._base_dir, 'GT')
-        self._mask_dir = os.path.join(self._base_dir, 'SSmask')
+        self._mask_dir = os.path.join(self._base_dir, 'SS')
         self._aolp_sin_dir = os.path.join(self._base_dir, 'polL_aolp_sin')
         self._aolp_cos_dir = os.path.join(self._base_dir, 'polL_aolp_cos')
         self._dolp_dir = os.path.join(self._base_dir, 'polL_dolp')
