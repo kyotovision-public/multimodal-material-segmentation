@@ -162,16 +162,19 @@ class TesterMultimodal(object):
         target_all = None
         output_all = None
         for i, sample in enumerate(tbar):
-            image, target, aolp, dolp, nir, nir_mask, uvmap,mask = \
-                sample['image'], sample['label'], sample['aolp'], sample['dolp'], sample['nir'], sample['nir_mask'], sample['uvmap'],sample['mask']
+            image, target, aolp, dolp, nir, nir_mask, u_map, v_map, mask = \
+                sample['image'], sample['label'], sample['aolp'], sample['dolp'], sample['nir'], sample['nir_mask'], \
+                sample['u_map'], sample['v_map'], sample['mask']
             if self.args.cuda:
-                image, target, aolp, dolp, nir, nir_mask, uvmap,mask = image.cuda(), target.cuda(), aolp.cuda(), dolp.cuda(), nir.cuda(), nir_mask.cuda(), uvmap.cuda(),mask.cuda()
+                image, target, aolp, dolp, nir, nir_mask, u_map, v_map, mask = image.cuda(), target.cuda(), aolp.cuda(), dolp.cuda(), nir.cuda(), nir_mask.cuda(), u_map.cuda(), v_map.cuda(), mask.cuda()
             aolp = aolp if self.args.use_aolp else None
             dolp = dolp if self.args.use_dolp else None
             nir  = nir  if self.args.use_nir else None
             nir_mask = nir_mask  if self.args.use_nir else None
 
-            
+            if dolp.shape != 4:  # avoide automatic squeeze in later version of pytorch data loading
+                dolp = dolp.unsqueeze(1)
+
             with torch.cuda.amp.autocast():
                 with torch.no_grad():
                     output= self.model(image, aolp, dolp, nir, mask)

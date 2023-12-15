@@ -107,10 +107,11 @@ class TrainerMultimodal(object):
         num_img_tr = len(self.train_loader)
         scaler = torch.cuda.amp.GradScaler()
         for i, sample in enumerate(tbar):
-            image, target, aolp, dolp, nir, nir_mask, uvmap,mask = \
-                sample['image'], sample['label'], sample['aolp'], sample['dolp'], sample['nir'], sample['nir_mask'], sample['uvmap'],sample['mask']
-
-            # # check tensors            
+            image, target, aolp, dolp, nir, nir_mask, u_map, v_map, mask = \
+                sample['image'], sample['label'], sample['aolp'], sample['dolp'], sample['nir'], sample['nir_mask'], sample['u_map'], sample['v_map'], sample['mask']
+            if dolp.shape != 4:  # avoide automatic squeeze in later version of pytorch data loading
+                dolp = dolp.unsqueeze(1)
+            # # check tensors
             # import matplotlib.pyplot as plt
             # import sys
             # img_np = image[0,0].numpy()
@@ -129,7 +130,7 @@ class TrainerMultimodal(object):
             # continue
 
             if self.args.cuda:
-                image, target, aolp, dolp, nir, nir_mask, uvmap,mask = image.cuda(), target.cuda(), aolp.cuda(), dolp.cuda(), nir.cuda(), nir_mask.cuda(), uvmap.cuda(),mask.cuda()
+                image, target, aolp, dolp, nir, nir_mask,  u_map, v_map,mask = image.cuda(), target.cuda(), aolp.cuda(), dolp.cuda(), nir.cuda(), nir_mask.cuda(), u_map.cuda(), v_map.cuda(), mask.cuda()
             self.scheduler(self.optimizer, i, epoch, self.best_pred)
             self.optimizer.zero_grad()
             aolp = aolp if self.args.use_aolp else None
@@ -174,12 +175,18 @@ class TrainerMultimodal(object):
         test_loss = 0.0
         scaler = torch.cuda.amp.GradScaler()
         for i, sample in enumerate(tbar):
-            image, target, aolp, dolp, nir, nir_mask, uvmap,mask = \
-                sample['image'], sample['label'], sample['aolp'], sample['dolp'], sample['nir'], sample['nir_mask'], sample['uvmap'],sample['mask']
+            image, target, aolp, dolp, nir, nir_mask, u_map, v_map, mask = \
+                sample['image'], sample['label'], sample['aolp'], sample['dolp'], sample['nir'], sample['nir_mask'], sample['u_map'], sample['v_map'], sample['mask']
             if self.args.cuda:
-                image, target, aolp, dolp, nir, nir_mask, uvmap,mask = image.cuda(), target.cuda(), aolp.cuda(), dolp.cuda(), nir.cuda(), nir_mask.cuda(), uvmap.cuda(),mask.cuda()
+                image, target, aolp, dolp, nir, nir_mask, u_map, v_map, mask = image.cuda(), target.cuda(), aolp.cuda(), dolp.cuda(), nir.cuda(), nir_mask.cuda(), u_map.cuda(), v_map.cuda(), mask.cuda()
             aolp = aolp if self.args.use_aolp else None
-            dolp = dolp if self.args.use_dolp else None
+            if self.args.use_dolp:
+                if dolp.shape != 4:  # avoide automatic squeeze in later version of pytorch data loading
+                    dolp = dolp.unsqueeze(1)
+                else:
+                    dolp = dolp
+            else:
+                dolp = None
             nir  = nir  if self.args.use_nir else None
             nir_mask = nir_mask  if self.args.use_nir else None         
             
@@ -236,12 +243,19 @@ class TrainerMultimodal(object):
         scaler = torch.cuda.amp.GradScaler()
         output_all = None
         for i, sample in enumerate(tbar):
-            image, target, aolp, dolp, nir, nir_mask, uvmap,mask = \
-                sample['image'], sample['label'], sample['aolp'], sample['dolp'], sample['nir'], sample['nir_mask'], sample['uvmap'],sample['mask']
+            image, target, aolp, dolp, nir, nir_mask, u_map, v_map, mask = \
+                sample['image'], sample['label'], sample['aolp'], sample['dolp'], sample['nir'], sample['nir_mask'], \
+                sample['u_map'], sample['v_map'], sample['mask']
             if self.args.cuda:
-                image, target, aolp, dolp, nir, nir_mask, uvmap,mask = image.cuda(), target.cuda(), aolp.cuda(), dolp.cuda(), nir.cuda(), nir_mask.cuda(), uvmap.cuda(),mask.cuda()
+                image, target, aolp, dolp, nir, nir_mask, u_map, v_map, mask = image.cuda(), target.cuda(), aolp.cuda(), dolp.cuda(), nir.cuda(), nir_mask.cuda(), u_map.cuda(), v_map.cuda(), mask.cuda()
             aolp = aolp if self.args.use_aolp else None
-            dolp = dolp if self.args.use_dolp else None
+            if self.args.use_dolp:
+                if dolp.shape != 4:  # avoide automatic squeeze in later version of pytorch data loading
+                    dolp = dolp.unsqueeze(1)
+                else:
+                    dolp = dolp
+            else:
+                dolp = None
             nir  = nir  if self.args.use_nir else None
             nir_mask = nir_mask  if self.args.use_nir else None            
             
